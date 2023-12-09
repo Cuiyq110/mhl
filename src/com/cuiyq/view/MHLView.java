@@ -33,6 +33,16 @@ public class MHLView {
         new MHLView().mainMenu();
     }
 
+//    显示餐桌状态方法
+    public void showDingingTableStatus() {
+        System.out.println("餐桌编号 \t\t 餐桌状态");
+        List<DingingTable> dingingTables = dingingTableService.list();
+        for (DingingTable dingingTable : dingingTables) {
+            System.out.println(dingingTable.getId() + " \t\t\t\t " + dingingTable.getStatus());
+        }
+        System.out.println("====================显示完毕=============");
+    }
+
     //主菜单
     public void mainMenu() {
 
@@ -84,13 +94,7 @@ public class MHLView {
 
                         switch (key) {
                             case "1":
-                                System.out.println("1显示餐桌状态");
-                                System.out.println("餐桌编号 \t\t 餐桌状态");
-                                List<DingingTable> dingingTables = dingingTableService.showTablesStatus();
-                                for (DingingTable dingingTable : dingingTables) {
-                                    System.out.println(dingingTable.getId() + " \t\t\t\t " + dingingTable.getStatus());
-                                }
-                                System.out.println("====================显示完毕=============");
+                                showDingingTableStatus();
                                 break;
 
                             case "2":

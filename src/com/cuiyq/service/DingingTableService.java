@@ -16,7 +16,7 @@ public class DingingTableService {
     private DingingTableDao dao = new DingingTableDao();
 
 //    显示餐桌状态
-    public List<DingingTable> showTablesStatus() {
+    public List<DingingTable> list() {
        return dao.queryMulti("select * from dingingTable", DingingTable.class);
     }
 
