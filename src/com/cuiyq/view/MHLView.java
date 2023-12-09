@@ -24,16 +24,15 @@ public class MHLView {
     //    定义EmployeeService属性
     private EmployeeService employeeService = new EmployeeService();
 
-//    定义DingingTableService属性
+    //    定义DingingTableService属性
     private DingingTableService dingingTableService = new DingingTableService();
-
 
 
     public static void main(String[] args) {
         new MHLView().mainMenu();
     }
 
-//    显示餐桌状态方法
+    //    显示餐桌状态方法
     public void showDingingTableStatus() {
         System.out.println("餐桌编号 \t\t 餐桌状态");
         List<DingingTable> dingingTables = dingingTableService.list();
@@ -98,9 +97,43 @@ public class MHLView {
                                 break;
 
                             case "2":
-                                System.out.println("2预定餐桌");
-                                break;
+                                System.out.println("===========预定餐桌=============");
+                                System.out.print("请输入餐桌号(-1退出)：");
+                                int dingingTableId = Utility.readInt(3);
+                                if (dingingTableId == -1) {
+                                    System.out.println("取消预定~~~");
+                                    break;
+                                }
+                                //根据id查找对象，如果对象为空代表餐桌不存在
+                                if (dingingTableService.isEmpty(dingingTableId)) {
+                                    System.out.println("餐桌不存在，请重新输入");
+                                    break;
+                                }
 
+                                //如果状态不为空，就不能预定
+                                if(!("空".equals(dingingTableService.getId(dingingTableId).getStatus()))) {
+                                    System.out.println("该餐桌已预订或就餐中，不能预定~~");
+                                    break;
+                                }
+
+                                //确认是否预定
+                                char key = Utility.readConfirmSelection();
+                                if (key == 'N') {
+                                    System.out.println("取消预定");
+                                    break;
+                                }
+
+                                System.out.print("请输入预定人姓名：");
+                                String oderName = Utility.readString(50);
+                                System.out.println("请输入预定人电话:");
+                                String oderTel = Utility.readString(50);
+
+                                //将状态更改为已预订
+                                if (dingingTableService.yuding(dingingTableId, oderName, oderTel)) {
+                                    System.out.println("============预定成功===========");
+                                }
+
+                                break;
                             case "3":
                                 System.out.println("3显示所有菜品");
                                 break;
