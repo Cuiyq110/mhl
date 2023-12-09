@@ -18,4 +18,17 @@ public class Test {
 
 
     }
+    @org.junit.Test
+    public void test1(){
+        System.out.println("你好");
+
+        try {
+            JDBCUtilsByDruid.getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+        }
+
+
+    }
 }
