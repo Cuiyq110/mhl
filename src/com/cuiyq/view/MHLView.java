@@ -1,5 +1,6 @@
 package com.cuiyq.view;
 
+import com.cuiyq.service.EmployeeService;
 import com.cuiyq.utils.Utility;
 
 /**
@@ -20,6 +21,7 @@ public class MHLView {
         new MHLView().mainMenu();
     }
 
+    //主菜单
     public void mainMenu() {
         
         while (loop) {
@@ -31,8 +33,32 @@ public class MHLView {
             key = Utility.readString(1);
             switch (key) {
                 case "1":
+                    String empId = "";//接收用户名
+                    String  empPwd = "";//接收密码
+                    System.out.println("请输入用户名：");
+                    empId = Utility.readString(50);
+                    System.out.println("请输入密码：");
+                    empPwd = Utility.readString(50);
+
+                    //到数据库中验证密码
+                    EmployeeService employeeService = new EmployeeService();
+                    if (employeeService.getEmployee(empId) == null) {
+                        System.out.println("用户名不存在,登录失败");
+                        break;
+                    }
+                    if (employeeService.getEmployee(empId, empPwd) == null) {
+                        System.out.println("密码错误,登录失败");
+                        break;
+                    }
+
+
+//                    if (!("1".equals(empPwd))) {
+//                        System.out.println("登录失败");
+//                        break;
+//                    }
 
                     System.out.println("登录成功");
+                    System.out.println();
                     System.out.println("=============满汉楼(二级菜单)=============");
                     System.out.println(" \t\t1 显示餐桌状态");
                     System.out.println(" \t\t2 预定餐桌");
