@@ -15,10 +15,12 @@ public class DingingTableService {
 
     private DingingTableDao dao = new DingingTableDao();
 
+/*
 //    判断是餐桌是否为空,真就是空
     public boolean isEmpty(int id) {
          return dao.querySingle("select * from dingingTable where id = ? ", DingingTable.class, id) == null ;
     }
+*/
 
 //    根据id预定餐桌，把空的餐桌改成已预订,如果成功返回true
     public boolean yuding(int id, String orderName, String orderTel) {
