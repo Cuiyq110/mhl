@@ -32,6 +32,36 @@ public class MHLView {
         new MHLView().mainMenu();
     }
 
+    //取消预定
+    public void unOrderDingingTable() {
+        System.out.println("===========取消预定=============");
+        System.out.print("请输入餐桌号(-1退出)：");
+        int dingingTableId = Utility.readInt(3);
+        if (dingingTableId == -1) {
+            System.out.println("取消预定~~~");
+            return;
+        }
+
+        //根据id查找对象，如果对象为空代表餐桌不存在
+        if (dingingTableService.getId(dingingTableId) == null) {
+            System.out.println("餐桌不存在，请重新输入");
+            return;
+        }
+
+//        如果状态不是已预订，则不能取消预定
+        if (!("已预订".equals(dingingTableService.getId(dingingTableId).getStatus()))) {
+            System.out.println("餐桌未预订，请重新输入");
+            return;
+        }
+
+//        状态设置为空
+        if (!(dingingTableService.unyuding(dingingTableId))) {
+            System.out.println("取消预定失败");
+            return;
+        }
+        System.out.println("取消预定成功");
+    }
+
     //    预定餐桌方法
     public void orderDingingTable() {
         System.out.println("===========预定餐桌=============");
@@ -129,17 +159,18 @@ public class MHLView {
                         System.out.println(" \t\t4 点餐服务");
                         System.out.println(" \t\t5 查看账单");
                         System.out.println(" \t\t6 结账");
+                        System.out.println(" \t\t7 取消预定");
                         System.out.println(" \t\t9 退出满汉楼");
                         System.out.print("请输入你的选择：");
                         key = Utility.readString(1);
 
                         switch (key) {
                             case "1":
-                                showDingingTableStatus();
+                                showDingingTableStatus();//显示餐桌状态
                                 break;
 
                             case "2":
-                                orderDingingTable();
+                                orderDingingTable(); //预定餐桌
                                 break;
                             case "3":
                                 System.out.println("3显示所有菜品");
@@ -154,6 +185,9 @@ public class MHLView {
                                 break;
                             case "6":
                                 System.out.println("6");
+                                break;
+                            case "7":
+                                unOrderDingingTable();//取消预定
                                 break;
                             case "9":
                                 System.out.println("退出满汉楼~");

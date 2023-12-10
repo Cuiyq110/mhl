@@ -15,6 +15,11 @@ public class DingingTableService {
 
     private DingingTableDao dao = new DingingTableDao();
 
+//    把餐桌从‘已预订’设置为‘空’
+    public boolean unyuding(int id) {
+        return dao.update("update dingingTable set status = '空' where id = ? ", id) > 0;
+    }
+
 /*
 //    判断是餐桌是否为空,真就是空
     public boolean isEmpty(int id) {
