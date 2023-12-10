@@ -34,7 +34,7 @@ public class DingingTableService {
 
 //    根据id返回对象
     public DingingTable getId(int id) {
-       return (DingingTable) dao.querySingle("select * from dingingTable where id = ?", DingingTable.class,id);
+       return  dao.querySingle("select * from dingingTable where id = ?", DingingTable.class,id);
     }
 
 //    显示餐桌状态

@@ -14,11 +14,11 @@ public class EmployeeService {
 
     //根据empId和empPwd返回一个employee对象
     public Employee getEmployee(String empId, String empPwd) {
-       return (Employee) employeeDao.querySingle("select * from employee where empId = ? and pwd = md5(?)", Employee.class,empId,empPwd);
+       return employeeDao.querySingle("select * from employee where empId = ? and pwd = md5(?)", Employee.class,empId,empPwd);
     }
 
 //    根据empId返回一个employee对象
     public Employee getEmployee(String empId) {
-        return (Employee) employeeDao.querySingle("select * from employee where empId =?", Employee.class,empId);
+        return  employeeDao.querySingle("select * from employee where empId =?", Employee.class,empId);
     }
 }
