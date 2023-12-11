@@ -1,8 +1,10 @@
 package com.cuiyq.view;
 
 import com.cuiyq.domain.DingingTable;
+import com.cuiyq.domain.Menu;
 import com.cuiyq.service.DingingTableService;
 import com.cuiyq.service.EmployeeService;
+import com.cuiyq.service.MenuService;
 import com.cuiyq.utils.Utility;
 
 import java.util.List;
@@ -27,10 +29,26 @@ public class MHLView {
     //    定义DingingTableService属性
     private DingingTableService dingingTableService = new DingingTableService();
 
+    //    定义MenuService属性
+    private MenuService menuService = new MenuService();
+
 
     public static void main(String[] args) {
         new MHLView().mainMenu();
     }
+
+//    显示所有菜品
+
+    public void listMenu() {
+        System.out.println("===========所有菜品=============");
+        System.out.print("菜品编号\t\t菜品名\t\t类别\t\t价格");
+        System.out.println();
+        for (Menu menu : menuService.list()) {
+            System.out.println(menu);
+        }
+        System.out.println("===========显示完毕=========");
+    }
+
 
     //取消预定
     public void unOrderDingingTable() {
@@ -78,7 +96,7 @@ public class MHLView {
         }
 
         //如果状态不为空，就不能预定
-        if(!("空".equals(dingingTableService.getId(dingingTableId).getStatus()))) {
+        if (!("空".equals(dingingTableService.getId(dingingTableId).getStatus()))) {
             System.out.println("该餐桌已预订或就餐中，不能预定~~");
             return;
         }
@@ -173,7 +191,7 @@ public class MHLView {
                                 orderDingingTable(); //预定餐桌
                                 break;
                             case "3":
-                                System.out.println("3显示所有菜品");
+                                listMenu();
                                 break;
 
                             case "4":

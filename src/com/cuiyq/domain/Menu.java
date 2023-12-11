@@ -55,11 +55,6 @@ public class Menu {
 
     @Override
     public String toString() {
-        return "Menu{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", type='" + type + '\'' +
-                '}';
+        return id + "\t\t\t" + name + "\t\t" + type + "\t\t" + price;
     }
 }
