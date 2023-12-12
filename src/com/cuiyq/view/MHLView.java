@@ -196,6 +196,44 @@ public class MHLView {
 
                             case "4":
                                 System.out.println("4点餐服务");
+                                System.out.println("===============点餐服务=============");
+
+                                System.out.print("请输入餐桌号(-1退出)：");
+                                int dingingTableId = Utility.readInt(3);
+                                if (dingingTableId == -1) {
+                                    System.out.println("取消预定~~~");
+                                    return;
+                                }
+                                //根据id查找对象，如果对象为空代表餐桌不存在
+                                if (dingingTableService.getId(dingingTableId) == null) {
+                                    System.out.println("餐桌不存在，请重新输入");
+                                    return;
+                                }
+
+//                               请选择要菜品的编号(-1退出):
+                                System.out.print("请选择要菜品的编号(-1退出)：");
+                                int menuId = Utility.readInt(3);
+                                if (menuId == -1) {
+                                    System.out.println("取消预定~~~");
+                                    return;
+                                }
+                                //根据id查找对象，如果对象为空代表菜品不存在
+                                if (menuService.getId(menuId) == null) {
+                                    System.out.println("菜品不存在，请重新输入");
+                                }
+
+                                System.out.print("请输入要点的菜品数量(-1退出)：");
+                                int nums = Utility.readInt(3);
+                                if (nums == -1) {
+                                    System.out.println("取消预定~~~");
+                                    return;
+                                }
+                                if (nums <= 0) {
+                                    System.out.println("您的输入有误~");
+                                    return;
+                                }
+
+                                System.out.println();
                                 break;
 
                             case "5":
